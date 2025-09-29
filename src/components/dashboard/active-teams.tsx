@@ -32,7 +32,7 @@ export function ActiveTeams() {
             />
           ))}
         </div>
-      ) : data?.teams.length > 0 ? (
+      ) : Array.isArray(data?.teams) && data.teams.length > 0 ? (
         <div className="space-y-3">
           {data.teams.map((team: any) => (
             <div

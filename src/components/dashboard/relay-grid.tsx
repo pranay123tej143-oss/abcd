@@ -68,19 +68,20 @@ export function RelayGrid() {
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        {data?.relays.map((relay: any) => {
-          const Icon = getRelayIcon(relay.deviceType);
-          return (
-            <button
-              key={relay.relayId}
-              onClick={() =>
-                mutation.mutate({
-                  relayId: relay.relayId,
-                  state: !relay.state,
-                })
-              }
-              disabled={mutation.isPending}
-              className={`
+        {Array.isArray(data?.relays) &&
+          data.relays.map((relay: any) => {
+            const Icon = getRelayIcon(relay.deviceType);
+            return (
+              <button
+                key={relay.relayId}
+                onClick={() =>
+                  mutation.mutate({
+                    relayId: relay.relayId,
+                    state: !relay.state,
+                  })
+                }
+                disabled={mutation.isPending}
+                className={`
                 p-4 rounded-lg border-2 transition-all
                 ${
                   relay.state
@@ -89,34 +90,34 @@ export function RelayGrid() {
                 }
                 hover:scale-105 disabled:opacity-50
               `}
-            >
-              <div className="flex items-center gap-3">
-                <Icon
-                  className={`h-6 w-6 ${
-                    relay.state
-                      ? "text-green-600 dark:text-green-400"
-                      : "text-gray-400"
-                  }`}
-                />
-                <div className="text-left">
-                  <p className="font-medium text-gray-900 dark:text-white">
-                    {relay.deviceType === "fan" ? "Fan" : "Light"} #
-                    {relay.deviceNumber}
-                  </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">
-                    {relay.state ? "ON" : "OFF"}
-                  </p>
+              >
+                <div className="flex items-center gap-3">
+                  <Icon
+                    className={`h-6 w-6 ${
+                      relay.state
+                        ? "text-green-600 dark:text-green-400"
+                        : "text-gray-400"
+                    }`}
+                  />
+                  <div className="text-left">
+                    <p className="font-medium text-gray-900 dark:text-white">
+                      {relay.deviceType === "fan" ? "Fan" : "Light"} #
+                      {relay.deviceNumber}
+                    </p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      {relay.state ? "ON" : "OFF"}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </button>
-          );
-        })}
+              </button>
+            );
+          })}
       </div>
 
       <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between text-sm">
           <span className="text-gray-600 dark:text-gray-400">
-            {data?.stats.on} / {data?.stats.total} relays active
+            {data?.stats?.on ?? 0} / {data?.stats?.total ?? 0} relays active
           </span>
           <span className="text-gray-600 dark:text-gray-400">
             Last update: {new Date().toLocaleTimeString()}

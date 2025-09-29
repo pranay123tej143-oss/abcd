@@ -32,7 +32,7 @@ export function RecentActivity() {
             />
           ))}
         </div>
-      ) : data?.logs.length > 0 ? (
+      ) : Array.isArray(data?.logs) && data.logs.length > 0 ? (
         <div className="space-y-3">
           {data.logs.map((log: any) => (
             <div
