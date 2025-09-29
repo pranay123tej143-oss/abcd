@@ -1,36 +1,164 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Lab – RFID Access Control & IoT Dashboard
 
-## Getting Started
+A full-stack **Next.js App Router** project for team-based lab resource management, real-time relay control, and RFID access logging.  
+Built with **NeonDB, Drizzle ORM, MQTT, shadcn/ui, and React Query**.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- RFID-based access control for lab members
+- Real-time relay control (fans, lights) via MQTT
+- Team management (create, assign, monitor teams)
+- Attendance logging and stats
+- Admin dashboard for bulk actions and monitoring
+- Dark/light theme with system preference
+- Modular App Router structure for easy scaling
+
+---
+
+## 🛠️ Tech Stack
+
+- **Next.js 15** (App Router, TypeScript, Tailwind)
+- **NeonDB** (PostgreSQL serverless)
+- **Drizzle ORM**
+- **MQTT** (HiveMQ Cloud Free)
+- **shadcn/ui, Radix UI, Lucide Icons**
+- **React Query, Zustand, Zod**
+
+---
+
+## 📂 Project Structure
+
+```
+└── 📁src
+    └── 📁app
+        └── 📁(auth)
+            └── 📁login
+                ├── page.tsx
+            ├── layout.tsx
+        └── 📁api
+            └── 📁attendance
+                └── 📁logs
+                    ├── route.ts
+                └── 📁stats
+                    ├── route.ts
+            └── 📁health
+                ├── route.ts
+            └── 📁mqtt
+                └── 📁init
+                    ├── route.ts
+            └── 📁relay
+                └── 📁bulk
+                    ├── route.ts
+                └── 📁state
+                    ├── route.ts
+                └── 📁toggle
+                    ├── route.ts
+            └── 📁rfid
+                └── 📁scan
+                    ├── route.ts
+                └── 📁verify
+                    ├── route.ts
+            └── 📁teams
+                └── 📁[teamId]
+                    ├── route.ts
+                └── 📁active
+                    ├── route.ts
+                ├── route.ts
+        └── 📁dashboard
+            └── 📁admin
+                └── 📁controls
+                    ├── page.tsx
+                └── 📁members
+                    ├── page.tsx
+                └── 📁teams
+                    ├── page.tsx
+                ├── page.tsx
+            └── 📁team
+                └── 📁[teamId]
+                    ├── page.tsx
+                ├── page.tsx
+            ├── layout.tsx
+            ├── page.tsx
+        ├── favicon.ico
+        ├── globals.css
+        ├── layout.tsx
+        ├── page.tsx
+    └── 📁components
+        └── 📁admin
+            ├── bulk-actions.tsx
+            ├── relay-controls.tsx
+        └── 📁dashboard
+            ├── active-teams.tsx
+            ├── recent-activity.tsx
+            ├── relay-grid.tsx
+            ├── stats-cards.tsx
+            ├── team-status.tsx
+        └── 📁layout
+            ├── header.tsx
+            ├── sidebar.tsx
+        └── 📁ui
+        ├── providers.tsx
+        ├── theme-provider.tsx
+    └── 📁hooks
+    └── 📁lib
+        └── 📁auth
+        └── 📁db
+            ├── index.ts
+            ├── queries.ts
+            ├── schema.ts
+        └── 📁mqtt
+            ├── client.ts
+            ├── handlers.ts
+    └── 📁store
+    └── types
+```
+
+---
+
+## ⚡ Getting Started
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Set up environment variables
+
+Copy `.env.example` to `.env.local` and fill in your **NeonDB** and **MQTT** credentials.
+
+### 3. Create database tables
+
+Use the SQL in `schema.ts` to create tables in NeonDB.
+
+### 4. (Optional) Seed the database
+
+```bash
+npx tsx seed.ts
+```
+
+### 5. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📖 Devdocs
 
-## Learn More
+See the `devdocs/` folder for:
 
-To learn more about Next.js, take a look at the following resources:
+- Full file structure
+- Component breakdowns
+- Setup and architecture notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📄 License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**MIT**
